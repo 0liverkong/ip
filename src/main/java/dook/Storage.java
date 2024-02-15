@@ -63,7 +63,7 @@ public class Storage {
      * Checks the existence of a file to write to in the path, if it does
      * not exist then it creates one.
      */
-    public void checkFile() {
+    public boolean isFileValid() {
         try {
             String filename = String.join(File.separator, path.subList(0, path.size() - 1));
             String workingDirectory = System.getProperty("user.dir");
@@ -84,8 +84,10 @@ public class Storage {
             } else {
                 System.out.println("save file detected!!");
             }
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

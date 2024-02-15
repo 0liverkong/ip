@@ -21,7 +21,8 @@ public class Dook {
     public Dook() {
         this.tasks = new TaskList();
         this.storage = new Storage(FILE_PATH);
-        this.storage.checkFile();
+        boolean isValidFile = this.storage.isFileValid();
+        assert isValidFile : "Invalid file path";
     }
 
     /**
@@ -33,6 +34,7 @@ public class Dook {
         try {
             this.tasks = this.storage.loadTaskListFromFile();
             Command c = Parser.parse(input);
+            assert storage.isFileValid() : "Invalid file path";
             return c.execute(this.tasks, this.storage);
         } catch (Exception e) {
             return e.getMessage();
